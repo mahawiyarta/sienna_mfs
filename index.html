@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SIENNA · Score Ramah Muslim</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="wrap">
+    <header class="header">
+      <div class="eyebrow">SIENNA · Penilaian Destinasi</div>
+      <h1>Muslim-Friendly Score</h1>
+      <p>
+        Masukkan penilaian indikator (0–4), hitung otomatis,
+        dan ekspor hasil ke CSV untuk dataset SIENNA.
+      </p>
+    </header>
+    <div class="notice">
+      <b>Catatan metodologi:</b>
+      Nilai 0 berarti kondisi terbukti tidak memenuhi indikator; jika belum ada data, pilih
+      <b>Belum dinilai</b>. Skor hanya dihitung ketika keenam indikator sudah dinilai.
+    </div>
+    <div class="grid">
+      <section class="card">
+        <h2>Form Penilaian</h2>
+        <div class="two">
+          <div class="field">
+            <label for="id">ID destinasi (opsional)</label>
+            <input
+              id="id"
+              placeholder="dest_0001"
+              maxlength="60"
+            >
+          </div>
+          <div class="field">
+            <label for="nama">Nama destinasi *</label>
+            <input
+              id="nama"
+              placeholder="Contoh: Pantai Kuta"
+              maxlength="160"
+            >
+          </div>
+        </div>
+        <div id="criteria"></div>
+        <div class="field" style="margin-top:18px">
+          <label for="source">
+            Sumber bukti / catatan penilaian
+          </label>
+          <textarea
+            id="source"
+            rows="3"
+            placeholder="Tautan sumber, observasi, tanggal, alasan pemberian nilai..."
+            maxlength="2000"
+          ></textarea>
+        </div>
+        <div class="actions">
+          <button id="save" type="button">
+            Simpan hasil ke tabel
+          </button>
+          <button id="reset" class="secondary" type="button">
+            Form baru
+          </button>
+        </div>
+        <div
+          class="status"
+          id="status"
+          aria-live="polite"
+        ></div>
+      </section>
+      <aside class="card">
+        <h2>Hasil Perhitungan</h2>
+        <div class="small">
+          Muslim-Friendly Score (MFS)
+        </div>
+        <div class="score" id="score" aria-live="polite">
+          — <sub>/ 100</sub>
+        </div>
+        <div class="progress">
+          <div id="bar"></div>
+        </div>
+        <p class="small" id="hint">
+          Lengkapi keenam indikator untuk melihat total skor.
+        </p>
+        <div class="scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Indikator</th>
+                <th>Kontribusi</th>
+              </tr>
+            </thead>
+            <tbody id="breakdown"></tbody>
+          </table>
+        </div>
+        <p class="small" style="margin-top:14px">
+          <b>Rumus:</b>
+          MFS = Σ (bobot (%) × nilai indikator ÷ 4).
+          Total bobot = 100%.
+        </p>
+        <p class="small">
+          Skor ini berbeda dari rating Google,
+          skor preferensi pengguna, dan nilai
+          fitness algoritma Panji.
+        </p>
+      </aside>
+    </div>
+    <section class="card table-wrap">
+      <h2>Hasil Penilaian Destinasi</h2>
+      <p class="small">
+        Hasil tersimpan secara lokal di browser ini.
+        Ekspor CSV sebelum pindah perangkat atau
+        membersihkan data browser.
+      </p>
+      <div class="actions">
+        <button id="export" type="button">
+          Ekspor CSV
+        </button>
+        <button id="clear" class="danger" type="button">
+          Hapus semua hasil
+        </button>
+      </div>
+      <div class="scroll" style="margin-top:14px">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Destinasi</th>
+              <th>MFS</th>
+              <th>Waktu dicatat</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
